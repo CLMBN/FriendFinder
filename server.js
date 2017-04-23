@@ -14,15 +14,18 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: 'application/vnd.api+json'}));
 
+/*Routes
+====================================================================
+html Routes*/
+var htmlRoutes = require('./app/routing/html-routes.js');
+/*api routes*/
+var apiRoutes = require('./app/routing/api-routes.js');
+app.use('/', htmlRoutes);
+app.use('/', apiRoutes);
+
 /*Server begin listening*/
 /*========================================================*/
 app.listen(PORT, function(){
 	console.log('App listening on PORT ' + PORT);
 });
 
-/*Routes
-====================================================================
-html Routes*/
-require('./app/routing/htmlRoutes.js')(app);
-/*api routes*/
-require('./app/routing/apiRoutes.js')(app);

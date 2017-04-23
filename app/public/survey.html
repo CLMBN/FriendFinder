@@ -191,9 +191,12 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title"></h4>
+						<h4 class="modal-title"><strong>Here is your best match</strong></h4>
 					</div>
-					<div class="modal-body"></div>
+					<div class="modal-body">
+						<h2 id="matchName"></h2>
+						<img id="matchImg" src="" alt="">
+					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
@@ -208,9 +211,60 @@
 	
 	<script>
 		$(".chosen-select").chosen();
+/*on click event for submit button*/
+		$('#submit').on('click', function(event) {
+			event.preventDefault();
+			let scoreArr = [];
+			let validated = true;
+
+/*validation name and picture are not blank*/
+			$('.form-control').each(function() {
+				if ($(this).val() === '') {
+					validated = false;
+					$(this).parent().addClass('has-error');
+				} else {
+					$(this).parent().removeClass('has-error');
+				}
+			});
+
+/*validate all questions are filled in*/
+			$('.chosen-select').each(function() {
+				if ($(this).val() === '') {
+					validated = false;
+					$(this).parent().addClass('has-error');
+				} else {
+					$(this).parent().removeClass('has-error');
+				}
+			});
+
+/*if form passes validation process survey results against saved saved surveys*/
+
+			if (validated) {
+				$('.chosen-select').each(function() {
+					scoreArr.push($(this).val());
+				});
+				for (var i = 0; i < scoreArr.length; i++) {
+					scoreArr[i] = parseInt(scoreArr[i]);
+				}
+				var newSurvey = {
+					name: $('#name').val().trim(),
+					picture: $('#photo').val().trim(),
+					scores: scoreArr
+				};
+				console.log(newSurvey);
+				$.post('/api/friends', newSurvey)
+					.done(function(data) {
+						console.log(data);
+						$('#modal').modal('toggle');
+						$('#matchName').text(data[0].name);
+						$('#matchImg').attr("src", data[0].picture);
+					});
+			} else {
+				alert('Check your answers you missed one!');
+			}
+
+		})
 
 	</script>
-
-
 </body>
 </html>

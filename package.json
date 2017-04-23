@@ -1,8 +1,8 @@
 {
   "name": "friendfinder",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Rutgers Coding BootCamp Homework 13",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/CLMBN/FriendFinder.git"
   },
-  "author": "",
+  "author": "Juan Ossa",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CLMBN/FriendFinder/issues"
