@@ -6,6 +6,8 @@ In the survey it checks that you answered all of the questions. Then compares ea
 ![Image of friend match](/app/images/screenshot.PNG)
 
 ### technologies used:
+#### Node
+#### Express
 #### Chosen:
 A jQuery plugin that makes long, unwieldy select boxes much more user friendly.
 https://harvesthq.github.io/chosen/
